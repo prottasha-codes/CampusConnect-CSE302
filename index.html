@@ -1,0 +1,1646 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#07090d" />
+  <title>Campus Connect — EWU</title>
+  <style>
+:root {
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface-2: #f8faff;
+  --ink: #111827;
+  --muted: #697386;
+  --muted-2: #8b95a7;
+  --line: #e7eaf0;
+  --nav: #0c1222;
+  --nav-2: #141d34;
+  --brand: #6857f5;
+  --brand-2: #7d6cff;
+  --brand-soft: #f0eeff;
+  --blue: #2f77ff;
+  --green: #12a66a;
+  --green-soft: #eafaf3;
+  --orange: #df7b17;
+  --orange-soft: #fff5e8;
+  --red: #dc4c4c;
+  --red-soft: #fff0f0;
+  --cyan: #168ca8;
+  --cyan-soft: #ebf9fc;
+  --shadow: 0 18px 40px rgba(20, 28, 52, .08);
+  --shadow-soft: 0 8px 24px rgba(20, 28, 52, .06);
+  --radius: 20px;
+  --radius-sm: 13px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+.hidden { display: none !important; }
+.muted { color: var(--muted); }
+
+/* Login */
+.login-screen { min-height: 100vh; background: #0b1121; position: relative; overflow: hidden; }
+.login-bg { position: absolute; border-radius: 50%; filter: blur(12px); opacity: .65; }
+.login-bg-a { width: 520px; height: 520px; left: -220px; top: -170px; background: radial-gradient(circle, rgba(108,87,245,.8), rgba(108,87,245,0)); }
+.login-bg-b { width: 600px; height: 600px; right: 27%; bottom: -380px; background: radial-gradient(circle, rgba(26,133,174,.48), rgba(26,133,174,0)); }
+.login-layout { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(430px, .95fr); position: relative; z-index: 1; }
+.login-showcase { padding: 54px clamp(48px, 7vw, 110px); display: flex; flex-direction: column; justify-content: space-between; color: white; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--ink); }
+.brand-light { color: white; }
+.brand-mark { width: 48px; height: 48px; display: grid; place-items: center; background: linear-gradient(135deg, #8678ff, #5a46ea); border-radius: 15px; font-weight: 900; letter-spacing: -.04em; box-shadow: 0 10px 26px rgba(104,87,245,.34); }
+.brand-mark.small { width: 42px; height: 42px; border-radius: 13px; font-size: 14px; }
+.brand strong { display: block; font-size: 17px; letter-spacing: -.02em; }
+.brand span { display: block; margin-top: 2px; font-size: 11px; opacity: .62; letter-spacing: .04em; text-transform: uppercase; }
+.showcase-copy { max-width: 650px; margin: 80px 0 54px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; color: #b8b0ff; }
+.eyebrow.dark { color: var(--brand); }
+.showcase-copy h1 { font-size: clamp(44px, 5.4vw, 76px); line-height: .98; letter-spacing: -.055em; margin: 22px 0 24px; max-width: 720px; }
+.showcase-copy p { max-width: 630px; margin: 0; color: rgba(255,255,255,.62); font-size: 17px; line-height: 1.7; }
+.showcase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.showcase-grid article { padding: 18px; min-height: 126px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.045); backdrop-filter: blur(8px); border-radius: 18px; }
+.showcase-grid article > span { display: block; font-size: 10px; color: #9e92ff; margin-bottom: 26px; letter-spacing: .15em; }
+.showcase-grid strong { display: block; font-size: 14px; }
+.showcase-grid small { display: block; color: rgba(255,255,255,.46); font-size: 11px; margin-top: 5px; line-height: 1.35; }
+.login-panel-wrap { display: grid; place-items: center; padding: 34px; background: #f8f9fc; border-radius: 36px 0 0 36px; min-height: 100vh; }
+.login-panel { width: min(100%, 470px); }
+.mobile-brand { display: none; }
+.login-panel h2 { font-size: 36px; letter-spacing: -.045em; margin: 12px 0 8px; }
+.login-panel > p { margin: 0 0 30px; }
+.form-stack { display: grid; gap: 18px; }
+.field { display: grid; gap: 8px; color: #303a4c; font-size: 12px; font-weight: 700; }
+.input-wrap { min-height: 52px; border: 1px solid #dfe3eb; border-radius: 14px; background: white; display: flex; align-items: center; transition: .18s ease; }
+.input-wrap:focus-within { border-color: #a79eff; box-shadow: 0 0 0 4px rgba(104,87,245,.08); }
+.input-icon { color: #8e97a8; width: 44px; text-align: center; font-size: 12px; }
+.input-wrap input { border: 0; outline: 0; min-width: 0; flex: 1; height: 50px; padding: 0 12px 0 0; color: var(--ink); background: transparent; }
+.input-wrap input::placeholder { color: #aab1be; }
+.icon-button { border: 0; background: none; color: var(--muted); padding: 10px 14px; font-size: 11px; font-weight: 800; }
+.button { border: 0; border-radius: 12px; padding: 12px 17px; font-weight: 800; font-size: 12px; transition: .16s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.button:hover { transform: translateY(-1px); }
+.button.primary { color: white; background: linear-gradient(135deg, var(--brand), #5b48e6); box-shadow: 0 10px 20px rgba(104,87,245,.2); }
+.button.danger { color: white; background: var(--red); }
+.button.ghost { color: #475064; background: #f1f3f7; }
+.button.outline { color: var(--brand); background: white; border: 1px solid #dcd8ff; }
+.button.success { color: #087149; background: #e8f9f1; }
+.button.wide { width: 100%; min-height: 52px; font-size: 13px; margin-top: 2px; }
+.button:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+.demo-divider { position: relative; text-align: center; margin: 30px 0 19px; }
+.demo-divider::before { content:""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #e6e9ef; }
+.demo-divider span { position: relative; z-index: 1; background: #f8f9fc; padding: 0 12px; font-size: 10px; color: #969eab; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; }
+.demo-roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.demo-role { border: 1px solid #e3e6ed; background: white; border-radius: 14px; padding: 13px 10px; display: flex; gap: 9px; align-items: center; text-align: left; transition: .16s ease; }
+.demo-role:hover { border-color: #bcb5ff; transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+.role-icon { width: 31px; height: 31px; border-radius: 10px; display: grid; place-items: center; font-weight: 900; font-size: 11px; flex: 0 0 auto; }
+.role-icon.student { background: #ece9ff; color: #5d49e6; }
+.role-icon.teacher { background: #e7f8f1; color: #0b8d5b; }
+.role-icon.admin { background: #fff0e2; color: #cd7114; }
+.demo-role strong { display: block; font-size: 11px; }
+.demo-role small { display: block; font-size: 9px; color: #9098a8; margin-top: 3px; }
+.login-note { text-align: center; color: #a1a8b4 !important; font-size: 10px; margin: 22px 0 0 !important; }
+
+/* App shell */
+.app-shell { min-height: 100vh; display: grid; grid-template-columns: 248px minmax(0, 1fr); }
+.sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 248px; background: var(--nav); color: white; padding: 25px 16px 18px; display: flex; flex-direction: column; z-index: 30; }
+.sidebar-head { display: flex; align-items: center; justify-content: space-between; padding: 0 8px 24px; }
+.sidebar-close { display: none; background: transparent; border: 0; color: white; font-size: 25px; }
+.nav-list { display: grid; gap: 6px; }
+.nav-item { width: 100%; display: flex; gap: 12px; align-items: center; border: 0; color: #8994ad; background: transparent; border-radius: 12px; padding: 12px 13px; font-weight: 700; text-align: left; font-size: 12px; transition: .15s ease; }
+.nav-item:hover { color: white; background: rgba(255,255,255,.05); }
+.nav-item.active { color: white; background: linear-gradient(90deg, rgba(104,87,245,.24), rgba(104,87,245,.08)); box-shadow: inset 3px 0 0 #7868ff; }
+.nav-icon { width: 22px; height: 22px; display: grid; place-items: center; font-size: 16px; }
+.sidebar-card { margin: auto 6px 18px; padding: 15px; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; background: linear-gradient(145deg, rgba(104,87,245,.13), rgba(255,255,255,.025)); }
+.tiny-label { display: block; color: #7f8aa3; font-size: 8px; font-weight: 900; letter-spacing: .13em; }
+.sidebar-card strong { display: block; font-size: 12px; margin-top: 7px; }
+.sidebar-card p { margin: 5px 0 0; color: #707c95; font-size: 9px; line-height: 1.45; }
+.sidebar-user { padding: 14px 6px 0; border-top: 1px solid rgba(255,255,255,.07); display: grid; grid-template-columns: 36px 1fr 30px; gap: 9px; align-items: center; }
+.avatar { width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, #7a6bff, #4d3bd4); color: white; display: grid; place-items: center; font-size: 12px; font-weight: 900; }
+.avatar.tiny { width: 30px; height: 30px; border-radius: 9px; }
+.sidebar-user-copy { min-width: 0; }
+.sidebar-user-copy strong { display: block; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sidebar-user-copy span { display: block; color: #7f8aa2; font-size: 9px; margin-top: 3px; }
+.logout-button { width: 30px; height: 30px; display: grid; place-items: center; background: transparent; border: 0; color: #7b87a0; font-size: 18px; border-radius: 9px; }
+.logout-button:hover { color: white; background: rgba(255,255,255,.06); }
+.main-area { grid-column: 2; min-width: 0; }
+.topbar { height: 78px; background: rgba(255,255,255,.92); backdrop-filter: blur(12px); border-bottom: 1px solid #eaedf2; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; position: sticky; top: 0; z-index: 20; }
+.topbar-left { display: flex; gap: 13px; align-items: center; }
+.page-kicker { margin: 0 0 2px; color: #969dac; font-size: 9px; text-transform: uppercase; letter-spacing: .12em; font-weight: 900; }
+.topbar h2 { margin: 0; font-size: 19px; letter-spacing: -.025em; }
+.menu-button { display: none; border: 0; background: #f1f3f7; width: 38px; height: 38px; border-radius: 10px; }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.date-pill { border: 1px solid var(--line); background: #fbfcfe; color: #778092; font-size: 10px; padding: 10px 13px; border-radius: 11px; }
+.profile-chip { border: 1px solid var(--line); background: white; min-height: 43px; padding: 5px 10px 5px 6px; border-radius: 13px; display: flex; align-items: center; gap: 8px; color: #646d7f; }
+.profile-chip-copy { text-align: left; max-width: 135px; }
+.profile-chip strong { display: block; color: var(--ink); font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.profile-chip small { display: block; color: #8c95a5; font-size: 8px; margin-top: 2px; }
+.content { padding: 28px 30px 46px; max-width: 1500px; margin: 0 auto; }
+
+/* Page components */
+.hero-panel { background: linear-gradient(135deg, #6352ec, #4030bb); border-radius: 22px; padding: 28px 30px; color: white; display: grid; grid-template-columns: 1fr auto; gap: 20px; overflow: hidden; position: relative; box-shadow: 0 14px 32px rgba(89,71,218,.18); }
+.hero-panel::before { content:""; position:absolute; width:240px; height:240px; border:1px solid rgba(255,255,255,.1); border-radius:50%; right:-70px; top:-120px; box-shadow: 0 0 0 36px rgba(255,255,255,.025), 0 0 0 72px rgba(255,255,255,.018); }
+.hero-panel > * { position: relative; z-index:1; }
+.hero-copy span { color: #cdc7ff; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .11em; }
+.hero-copy h3 { font-size: 28px; letter-spacing: -.04em; margin: 8px 0 8px; }
+.hero-copy p { margin: 0; color: rgba(255,255,255,.66); max-width: 650px; font-size: 12px; line-height: 1.6; }
+.hero-action { align-self: center; min-width: 130px; }
+.hero-action .button { background: white; color: #5140cf; box-shadow: none; }
+.stats-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 13px; margin: 18px 0; }
+.stat-card { background: white; border: 1px solid #e9ecf2; border-radius: 16px; padding: 17px; display: grid; grid-template-columns: 37px 1fr; gap: 11px; align-items: center; box-shadow: 0 4px 10px rgba(20,28,52,.02); }
+.stat-icon { width: 37px; height: 37px; display: grid; place-items:center; border-radius: 11px; font-size: 15px; }
+.stat-icon.purple { background: #efedff; color:#6652ee; }
+.stat-icon.green { background:#eaf9f2; color:#139263; }
+.stat-icon.orange { background:#fff3e6; color:#ce751b; }
+.stat-icon.blue { background:#eaf2ff; color:#3978e8; }
+.stat-icon.cyan { background:#e9f8fb; color:#188ba3; }
+.stat-copy span { display:block; color:#8f98a9; font-size:9px; font-weight:700; }
+.stat-copy strong { display:block; font-size:22px; margin-top:2px; letter-spacing:-.04em; }
+.dashboard-grid { display:grid; grid-template-columns: 1.55fr .85fr; gap:16px; }
+.panel { background:white; border:1px solid #e8ebf1; border-radius:18px; box-shadow: 0 5px 14px rgba(20,28,52,.025); }
+.panel-head { padding:18px 19px 13px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.panel-head h3 { margin:0; font-size:13px; letter-spacing:-.02em; }
+.panel-head p { margin:4px 0 0; color:#929aaa; font-size:9px; }
+.text-button { border:0; background:transparent; color:var(--brand); font-weight:800; font-size:10px; }
+.event-mini-list { padding: 0 19px 15px; display:grid; gap:9px; }
+.event-mini { padding:12px 0; border-top:1px solid #eff1f5; display:grid; grid-template-columns:42px 1fr auto; align-items:center; gap:11px; }
+.date-box { width:42px; height:44px; border-radius:11px; background:#f2f0ff; color:#5846dd; display:grid; place-items:center; align-content:center; }
+.date-box strong { font-size:15px; line-height:1; }
+.date-box span { font-size:7px; font-weight:900; margin-top:3px; text-transform:uppercase; }
+.event-mini-copy strong { display:block; font-size:10px; }
+.event-mini-copy span { display:block; color:#939bab; font-size:8px; margin-top:4px; }
+.event-mini-meta { text-align:right; }
+.event-mini-meta strong { display:block; font-size:9px; }
+.event-mini-meta span { display:block; color:#939bab; font-size:8px; margin-top:3px; }
+.quick-grid { padding: 0 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.quick-action { border:1px solid #e8eaf0; background:#fbfcfe; border-radius:13px; padding:14px 12px; text-align:left; transition:.15s ease; }
+.quick-action:hover { transform:translateY(-2px); border-color:#cfcaff; background:#faf9ff; }
+.quick-action span { display:grid; place-items:center; width:30px; height:30px; border-radius:9px; background:#efedff; color:#604cdf; margin-bottom:9px; }
+.quick-action strong { display:block; font-size:9px; }
+.quick-action small { display:block; color:#969ead; font-size:8px; margin-top:3px; }
+
+.page-toolbar { display:flex; justify-content:space-between; align-items:center; gap:13px; margin-bottom:16px; }
+.page-intro h3 { margin:0; font-size:18px; letter-spacing:-.03em; }
+.page-intro p { margin:5px 0 0; color:var(--muted); font-size:10px; }
+.toolbar-actions { display:flex; align-items:center; gap:9px; }
+.search-box { width:min(300px, 34vw); height:41px; display:flex; align-items:center; gap:8px; border:1px solid #e1e5ec; border-radius:12px; padding:0 12px; background:white; }
+.search-box span { color:#99a1b0; }
+.search-box input { border:0; outline:0; min-width:0; flex:1; color:var(--ink); font-size:11px; }
+.filter-select { height:41px; border:1px solid #e1e5ec; border-radius:12px; background:white; padding:0 31px 0 11px; color:#596275; font-size:10px; outline:0; }
+.module-summary { display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-bottom:16px; }
+.mini-summary { background:white; border:1px solid #e7eaf0; border-radius:15px; padding:15px 17px; }
+.mini-summary span { display:block; color:#969ead; font-size:9px; }
+.mini-summary strong { display:block; margin-top:4px; font-size:18px; letter-spacing:-.03em; }
+.cards-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:14px; }
+.data-card { background:white; border:1px solid #e7eaf0; border-radius:17px; padding:17px; display:flex; flex-direction:column; min-height:210px; box-shadow:0 5px 15px rgba(20,28,52,.025); transition:.17s ease; }
+.data-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-soft); border-color:#dcdfea; }
+.card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.card-icon { width:38px; height:38px; display:grid; place-items:center; border-radius:11px; background:#f0eeff; color:#5e4be3; font-weight:900; font-size:12px; }
+.card-icon.green { background:#eaf9f2; color:#0f8d5a; }
+.card-icon.orange { background:#fff3e5; color:#cc731b; }
+.card-icon.blue { background:#eaf2ff; color:#2f72e7; }
+.badge { display:inline-flex; align-items:center; gap:5px; padding:6px 8px; border-radius:999px; font-size:8px; font-weight:800; }
+.badge.green { color:#0c8556; background:#e9f8f1; }
+.badge.orange { color:#c06b15; background:#fff2e3; }
+.badge.red { color:#be4646; background:#ffeded; }
+.badge.purple { color:#5a48d9; background:#efedff; }
+.badge.gray { color:#6d7687; background:#f1f3f6; }
+.badge.blue { color:#266bcf; background:#eaf2ff; }
+.data-card h4 { margin:13px 0 5px; font-size:13px; letter-spacing:-.02em; }
+.card-description { color:#7d8697; font-size:9px; line-height:1.55; margin:0; min-height:28px; }
+.card-meta { display:flex; flex-wrap:wrap; gap:8px 13px; margin-top:12px; color:#858e9f; font-size:8px; }
+.card-meta strong { color:#475164; }
+.card-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:12px; }
+.tag { padding:5px 7px; border-radius:7px; background:#f4f5f8; color:#626c7e; font-size:7.5px; font-weight:800; }
+.card-spacer { flex:1; }
+.card-footer { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:15px; padding-top:12px; border-top:1px solid #f0f2f5; }
+.owner { min-width:0; }
+.owner strong { display:block; max-width:145px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:8.5px; }
+.owner span { display:block; color:#98a0af; font-size:7.5px; margin-top:2px; }
+.card-actions { display:flex; gap:5px; flex-wrap:wrap; justify-content:flex-end; }
+.mini-btn { border:0; border-radius:8px; padding:7px 8px; font-size:8px; font-weight:800; color:#556074; background:#f1f3f6; }
+.mini-btn:hover { background:#e9ebf0; }
+.mini-btn.primary { background:#eeebff; color:#5844d9; }
+.mini-btn.success { background:#e8f8f0; color:#087d4f; }
+.mini-btn.danger { background:#ffeded; color:#bd4545; }
+.price { font-size:18px !important; color:#161d2c !important; letter-spacing:-.03em; }
+.price small { font-size:9px; color:#7f899a; font-weight:700; }
+.progress { height:5px; border-radius:5px; background:#eef0f4; overflow:hidden; margin-top:9px; }
+.progress > span { display:block; height:100%; background:linear-gradient(90deg,#6c58ef,#917fff); border-radius:inherit; }
+.empty-state { background:white; border:1px dashed #d8dde7; border-radius:18px; padding:58px 20px; text-align:center; grid-column:1/-1; }
+.empty-symbol { width:54px; height:54px; display:grid; place-items:center; margin:0 auto 13px; border-radius:16px; background:#f0eeff; color:#5f4be0; font-size:22px; }
+.empty-state h4 { margin:0; font-size:14px; }
+.empty-state p { margin:7px auto 0; color:#8e97a7; font-size:10px; max-width:370px; }
+
+.table-panel { background:white; border:1px solid #e7eaf0; border-radius:17px; overflow:hidden; }
+.table-wrap { overflow:auto; }
+.data-table { width:100%; border-collapse:collapse; min-width:850px; }
+.data-table th { background:#fafbfc; color:#8b94a5; text-align:left; font-size:8px; letter-spacing:.08em; text-transform:uppercase; padding:12px 14px; border-bottom:1px solid #e9ecf1; }
+.data-table td { padding:13px 14px; border-bottom:1px solid #f0f2f5; font-size:9px; color:#505a6c; vertical-align:middle; }
+.data-table tr:last-child td { border-bottom:0; }
+.table-user { display:flex; gap:9px; align-items:center; }
+.table-user .avatar { width:31px; height:31px; border-radius:9px; font-size:9px; }
+.table-user strong { display:block; color:#212938; font-size:9px; }
+.table-user span { display:block; color:#959dac; font-size:7.5px; margin-top:2px; }
+
+/* Modal */
+.modal-backdrop { position:fixed; inset:0; background:rgba(8,13,25,.55); backdrop-filter:blur(4px); z-index:100; display:grid; place-items:center; padding:20px; animation:fadeIn .13s ease; }
+.modal { width:min(620px, 100%); max-height:90vh; background:white; border-radius:20px; box-shadow:0 28px 70px rgba(0,0,0,.24); overflow:auto; animation:modalIn .18s ease; }
+.modal-head { display:flex; align-items:flex-start; justify-content:space-between; padding:22px 24px 15px; border-bottom:1px solid #edf0f4; position:sticky; top:0; background:white; z-index:2; }
+.modal-head h3 { margin:6px 0 0; font-size:20px; letter-spacing:-.03em; }
+.modal-close { width:34px; height:34px; border:0; background:#f2f4f7; border-radius:10px; color:#646e80; font-size:21px; }
+.modal-body { padding:20px 24px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form-field { display:grid; gap:7px; }
+.form-field.full { grid-column:1/-1; }
+.form-field > span { font-size:9px; font-weight:800; color:#4f596b; }
+.form-field input, .form-field select, .form-field textarea { width:100%; border:1px solid #dfe3ea; border-radius:11px; background:white; color:var(--ink); outline:0; padding:11px 12px; font-size:10px; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color:#a89fff; box-shadow:0 0 0 3px rgba(104,87,245,.07); }
+.form-field textarea { min-height:90px; resize:vertical; line-height:1.5; }
+.form-help { color:#949dac; font-size:8px; margin-top:-2px; }
+.checkbox-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:7px; }
+.check-card { display:flex; align-items:center; gap:7px; border:1px solid #e4e7ed; border-radius:9px; padding:8px; font-size:8.5px; color:#5c6678; }
+.modal-actions { padding:14px 24px 20px; border-top:1px solid #edf0f4; display:flex; justify-content:flex-end; gap:8px; position:sticky; bottom:0; background:white; }
+.confirm-card { width:min(390px,100%); padding:27px; background:white; border-radius:19px; text-align:center; box-shadow:0 28px 70px rgba(0,0,0,.24); }
+.confirm-symbol { width:48px; height:48px; border-radius:14px; display:grid; place-items:center; background:#fff0f0; color:#c84c4c; font-weight:900; margin:0 auto 13px; }
+.confirm-card h3 { margin:0; font-size:17px; }
+.confirm-card p { color:#7d8697; font-size:10px; line-height:1.55; margin:8px 0 21px; }
+.confirm-actions { display:flex; justify-content:center; gap:8px; }
+
+.toast-stack { position:fixed; right:18px; bottom:18px; z-index:200; display:grid; gap:8px; width:min(340px,calc(100vw - 36px)); }
+.toast { background:#151d2c; color:white; border-radius:13px; padding:12px 14px; box-shadow:0 16px 35px rgba(10,16,30,.22); display:grid; grid-template-columns:28px 1fr auto; gap:9px; align-items:center; animation:toastIn .2s ease; }
+.toast-icon { width:28px; height:28px; border-radius:8px; display:grid; place-items:center; background:#26314a; font-weight:900; font-size:10px; }
+.toast.success .toast-icon { background:#123f31; color:#68e4af; }
+.toast.error .toast-icon { background:#4a252b; color:#ff959d; }
+.toast strong { display:block; font-size:9px; }
+.toast span { display:block; color:#9ca7ba; font-size:8px; margin-top:2px; }
+.toast button { border:0; background:transparent; color:#77849a; }
+
+.loading { min-height:260px; display:grid; place-items:center; }
+.spinner { width:34px; height:34px; border:3px solid #e3e6ed; border-top-color:var(--brand); border-radius:50%; animation:spin .7s linear infinite; }
+
+@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes modalIn { from { opacity:0; transform:translateY(8px) scale(.985); } to { opacity:1; transform:none; } }
+@keyframes toastIn { from { opacity:0; transform:translateY(7px); } to { opacity:1; transform:none; } }
+
+@media (max-width: 1120px) {
+  .stats-grid { grid-template-columns:repeat(3,1fr); }
+  .cards-grid { grid-template-columns:repeat(2,1fr); }
+  .showcase-grid { grid-template-columns:1fr 1fr; max-width:520px; }
+  .showcase-grid article { min-height:108px; }
+  .showcase-grid article > span { margin-bottom:18px; }
+}
+
+@media (max-width: 900px) {
+  .login-layout { grid-template-columns:1fr; }
+  .login-showcase { display:none; }
+  .login-panel-wrap { border-radius:0; padding:28px 22px; }
+  .mobile-brand { display:flex; margin-bottom:55px; }
+  .app-shell { grid-template-columns:1fr; }
+  .sidebar { transform:translateX(-102%); transition:.2s ease; box-shadow:20px 0 45px rgba(0,0,0,.18); }
+  .sidebar.open { transform:translateX(0); }
+  .sidebar-close { display:block; }
+  .sidebar-overlay { position:fixed; inset:0; background:rgba(7,12,23,.45); z-index:25; display:none; }
+  .sidebar-overlay.open { display:block; }
+  .main-area { grid-column:1; }
+  .menu-button { display:grid; place-items:center; }
+  .dashboard-grid { grid-template-columns:1fr; }
+  .content { padding:22px 20px 40px; }
+  .topbar { padding:0 20px; }
+}
+
+@media (max-width: 700px) {
+  .date-pill { display:none; }
+  .profile-chip-copy { display:none; }
+  .hero-panel { grid-template-columns:1fr; padding:24px; }
+  .hero-action { justify-self:start; }
+  .hero-copy h3 { font-size:23px; }
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .cards-grid { grid-template-columns:1fr; }
+  .page-toolbar { align-items:flex-start; flex-direction:column; }
+  .toolbar-actions { width:100%; flex-wrap:wrap; }
+  .search-box { width:100%; flex:1 0 100%; }
+  .module-summary { grid-template-columns:1fr; }
+  .modal-body { grid-template-columns:1fr; }
+  .form-field.full { grid-column:auto; }
+}
+
+@media (max-width: 480px) {
+  .demo-roles { grid-template-columns:1fr; }
+  .demo-role { padding:12px; }
+  .login-panel h2 { font-size:30px; }
+  .stats-grid { grid-template-columns:1fr; }
+  .topbar { height:70px; padding:0 14px; }
+  .content { padding:18px 14px 34px; }
+  .quick-grid { grid-template-columns:1fr; }
+}
+
+/* ========================================================================
+   CAMPUS CONNECT — DARK PRO UI
+   Presentation-focused visual refresh. Database / API logic is unchanged.
+   ======================================================================== */
+:root {
+  color-scheme: dark;
+  --bg: #07090d;
+  --surface: #0d1118;
+  --surface-2: #111722;
+  --surface-3: #151c29;
+  --ink: #f3f6fb;
+  --muted: #8f9aad;
+  --muted-2: #69768d;
+  --line: #202836;
+  --line-strong: #2b3547;
+  --nav: #080b11;
+  --nav-2: #101621;
+  --brand: #8b7cff;
+  --brand-2: #6857f5;
+  --brand-soft: rgba(139, 124, 255, .13);
+  --blue: #5c9cff;
+  --green: #3dd598;
+  --green-soft: rgba(61, 213, 152, .12);
+  --orange: #f5a64f;
+  --orange-soft: rgba(245, 166, 79, .12);
+  --red: #ff6b78;
+  --red-soft: rgba(255, 107, 120, .12);
+  --cyan: #4fd7ee;
+  --cyan-soft: rgba(79, 215, 238, .12);
+  --shadow: 0 22px 60px rgba(0, 0, 0, .38);
+  --shadow-soft: 0 12px 34px rgba(0, 0, 0, .25);
+}
+
+html, body {
+  background:
+    radial-gradient(circle at 74% -8%, rgba(104, 87, 245, .09), transparent 30%),
+    radial-gradient(circle at 22% 110%, rgba(79, 215, 238, .05), transparent 30%),
+    var(--bg);
+  color: var(--ink);
+}
+
+body { min-height: 100vh; }
+::selection { background: rgba(139,124,255,.35); color: #fff; }
+* { scrollbar-width: thin; scrollbar-color: #2d3749 #0b0f16; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-track { background: #0b0f16; }
+*::-webkit-scrollbar-thumb { background: #2d3749; border-radius: 20px; border: 2px solid #0b0f16; }
+
+/* Login — black glass layout */
+.login-screen {
+  background:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px),
+    radial-gradient(circle at 12% 18%, rgba(111,88,255,.22), transparent 34%),
+    radial-gradient(circle at 88% 82%, rgba(38,174,218,.13), transparent 30%),
+    #06080c;
+  background-size: 44px 44px, 44px 44px, auto, auto, auto;
+}
+.login-bg { filter: blur(22px); opacity: .48; }
+.login-bg-a { background: radial-gradient(circle, rgba(127,103,255,.8), rgba(127,103,255,0)); }
+.login-bg-b { background: radial-gradient(circle, rgba(42,186,225,.5), rgba(42,186,225,0)); }
+.login-showcase { color: #fff; }
+.showcase-copy h1 { text-shadow: 0 10px 45px rgba(0,0,0,.32); }
+.showcase-copy p { color: #98a5b9; }
+.showcase-grid article {
+  border-color: rgba(255,255,255,.10);
+  background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+.showcase-grid article:hover { border-color: rgba(139,124,255,.38); background: rgba(139,124,255,.065); }
+.showcase-grid small { color: #8491a7; }
+.showcase-grid article > span { color: #a89cff; }
+.login-panel-wrap {
+  background: rgba(9, 12, 18, .88);
+  border-left: 1px solid rgba(255,255,255,.07);
+  box-shadow: -30px 0 80px rgba(0,0,0,.22);
+  backdrop-filter: blur(22px);
+}
+.login-panel {
+  padding: 34px;
+  border: 1px solid #202837;
+  border-radius: 26px;
+  background: linear-gradient(145deg, rgba(19,25,36,.95), rgba(10,14,21,.96));
+  box-shadow: 0 30px 75px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.035);
+}
+.login-panel h2 { color: #f7f9fd; }
+.login-panel > p { color: #7f8ca2; }
+.brand { color: var(--ink); }
+.brand-mark {
+  background: linear-gradient(135deg, #9c8fff, #6857f5 55%, #4e3fd0);
+  box-shadow: 0 12px 30px rgba(104,87,245,.30), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.eyebrow.dark { color: #a89cff; }
+.field { color: #b5bfce; }
+.input-wrap {
+  background: #0a0f17;
+  border-color: #273043;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018);
+}
+.input-wrap:hover { border-color: #354056; }
+.input-wrap:focus-within { border-color: #7768ee; box-shadow: 0 0 0 4px rgba(123,105,244,.10), inset 0 1px 0 rgba(255,255,255,.025); }
+.input-icon { color: #667389; }
+.input-wrap input { color: #eef2f8; }
+.input-wrap input::placeholder { color: #556176; }
+.icon-button { color: #8490a4; }
+.icon-button:hover { color: #c9d0dc; }
+.demo-divider::before { background: #232b39; }
+.demo-divider span { background: #111721; color: #68758a; }
+.demo-role {
+  background: #0b1018;
+  border-color: #222b3a;
+  color: #e7ebf2;
+}
+.demo-role:hover { border-color: #6857f5; background: #111525; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.demo-role small { color: #69768b; }
+.role-icon.student { background: rgba(139,124,255,.13); color: #a99eff; }
+.role-icon.teacher { background: rgba(61,213,152,.12); color: #65e0ad; }
+.role-icon.admin { background: rgba(245,166,79,.13); color: #ffb968; }
+.login-note { color: #59667b !important; }
+
+/* Main shell */
+.app-shell { background: transparent; grid-template-columns: 264px minmax(0,1fr); }
+.sidebar {
+  width: 264px;
+  background:
+    radial-gradient(circle at 50% -5%, rgba(139,124,255,.11), transparent 28%),
+    linear-gradient(180deg, #090c12 0%, #070a10 100%);
+  border-right: 1px solid #1d2431;
+  box-shadow: 16px 0 45px rgba(0,0,0,.12);
+  padding: 25px 17px 18px;
+}
+.sidebar-head { padding-bottom: 28px; }
+.nav-list { gap: 7px; }
+.nav-item {
+  color: #758198;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  padding: 12px 13px;
+  font-size: 12.5px;
+}
+.nav-item:hover { color: #dce2eb; background: #101621; border-color: #1e2736; }
+.nav-item.active {
+  color: #fff;
+  background: linear-gradient(100deg, rgba(117,95,244,.20), rgba(117,95,244,.06));
+  border-color: rgba(139,124,255,.20);
+  box-shadow: inset 3px 0 0 #8b7cff, 0 8px 24px rgba(0,0,0,.14);
+}
+.nav-item.active .nav-icon { color: #b7adff; }
+.sidebar-card {
+  border-color: #202837;
+  background: linear-gradient(145deg, rgba(139,124,255,.10), rgba(255,255,255,.015));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+.tiny-label { color: #69758b; }
+.sidebar-card p { color: #69758b; }
+.sidebar-user { border-top-color: #1d2531; }
+.sidebar-user-copy span { color: #667288; }
+.logout-button { color: #69758b; }
+.logout-button:hover { color: #fff; background: #151b26; }
+.main-area { grid-column: 2; }
+.topbar {
+  height: 82px;
+  background: rgba(7, 9, 13, .82);
+  border-bottom-color: #1b2230;
+  box-shadow: 0 10px 30px rgba(0,0,0,.10);
+  backdrop-filter: blur(18px);
+}
+.page-kicker { color: #6d788c; }
+.topbar h2 { color: #f3f5f9; font-size: 20px; }
+.menu-button { background: #111722; color: #cbd3df; border: 1px solid #242d3d; }
+.date-pill { background: #0d121b; border-color: #222b39; color: #8390a4; }
+.profile-chip { background: #0d121b; border-color: #242d3b; color: #758198; }
+.profile-chip:hover { border-color: #3a4559; background: #111722; }
+.profile-chip strong { color: #e8ecf2; }
+.profile-chip small { color: #768297; }
+.content { max-width: 1520px; padding: 31px 32px 52px; }
+
+/* Dashboard */
+.hero-panel {
+  background:
+    radial-gradient(circle at 88% 15%, rgba(101,214,255,.16), transparent 27%),
+    linear-gradient(135deg, #221c50 0%, #382c8f 48%, #181f45 100%);
+  border: 1px solid rgba(151,139,255,.22);
+  box-shadow: 0 24px 55px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.07);
+  border-radius: 24px;
+  padding: 31px 32px;
+}
+.hero-panel::before { border-color: rgba(255,255,255,.09); box-shadow: 0 0 0 36px rgba(255,255,255,.02), 0 0 0 72px rgba(255,255,255,.013); }
+.hero-copy span { color: #bbb3ff; }
+.hero-copy h3 { font-size: 30px; }
+.hero-copy p { color: #aab1c4; font-size: 12.5px; }
+.hero-action .button { background: #f7f8fb; color: #4033a9; box-shadow: 0 10px 25px rgba(0,0,0,.20); }
+.hero-action .button:hover { background: #fff; }
+.stats-grid { gap: 14px; margin: 19px 0; }
+.stat-card {
+  background: linear-gradient(145deg, #111720, #0d121a);
+  border-color: #202938;
+  border-radius: 17px;
+  box-shadow: 0 9px 28px rgba(0,0,0,.13), inset 0 1px 0 rgba(255,255,255,.02);
+  padding: 17px;
+}
+.stat-card:hover { transform: translateY(-2px); border-color: #313d51; }
+.stat-icon.purple { background: rgba(139,124,255,.13); color:#aa9fff; }
+.stat-icon.green { background:rgba(61,213,152,.12); color:#57daa6; }
+.stat-icon.orange { background:rgba(245,166,79,.12); color:#ffb763; }
+.stat-icon.blue { background:rgba(92,156,255,.12); color:#79aeff; }
+.stat-icon.cyan { background:rgba(79,215,238,.12); color:#69e0f4; }
+.stat-copy span { color: #7c899d; font-size: 9.5px; }
+.stat-copy strong { color: #f2f5fa; }
+.dashboard-grid { gap: 17px; }
+.panel {
+  background: linear-gradient(145deg, #10151e, #0c1118);
+  border-color: #202837;
+  box-shadow: 0 13px 35px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.018);
+}
+.panel-head h3 { color: #eef1f6; font-size: 14px; }
+.panel-head p { color: #778398; font-size: 9.5px; }
+.text-button { color: #9d92ff; }
+.event-mini { border-top-color: #202735; }
+.date-box { background: rgba(139,124,255,.12); color: #aa9fff; border: 1px solid rgba(139,124,255,.14); }
+.event-mini-copy strong { color: #e9edf3; font-size: 10.5px; }
+.event-mini-copy span, .event-mini-meta span { color: #758197; }
+.event-mini-meta strong { color: #d9dee7; }
+.quick-action {
+  border-color: #202837;
+  background: #0c1118;
+  color: #e8ecf2;
+}
+.quick-action:hover { border-color: #4f457f; background: #121725; box-shadow: 0 8px 24px rgba(0,0,0,.17); }
+.quick-action span { background: rgba(139,124,255,.12); color: #a89eff; }
+.quick-action strong { font-size: 10px; }
+.quick-action small { color: #718096; font-size: 8.5px; }
+
+/* Module pages */
+.page-intro h3 { color: #f1f4f8; font-size: 20px; }
+.page-intro p { color: #7f8b9e; font-size: 10.5px; }
+.search-box {
+  background: #0d121a;
+  border-color: #263041;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018);
+}
+.search-box:focus-within { border-color: #6558c6; box-shadow: 0 0 0 3px rgba(139,124,255,.08); }
+.search-box span { color: #69768b; }
+.search-box input { color: #e9edf3; background: transparent; }
+.search-box input::placeholder { color: #556276; }
+.filter-select {
+  background: #0d121a;
+  border-color: #263041;
+  color: #a9b2c1;
+}
+.filter-select:focus { border-color: #6558c6; }
+.filter-select option { background: #0d121a; color: #e8ecf2; }
+.mini-summary {
+  background: linear-gradient(145deg, #10161f, #0c1118);
+  border-color: #202837;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018);
+}
+.mini-summary span { color: #778499; font-size: 9.5px; }
+.mini-summary strong { color: #eef2f7; }
+.cards-grid { gap: 15px; }
+.data-card {
+  background: linear-gradient(150deg, #111720, #0c1118 72%);
+  border-color: #202938;
+  min-height: 218px;
+  box-shadow: 0 11px 30px rgba(0,0,0,.13), inset 0 1px 0 rgba(255,255,255,.018);
+}
+.data-card:hover { border-color: #38455b; box-shadow: 0 17px 42px rgba(0,0,0,.22); transform: translateY(-3px); }
+.data-card h4 { color: #edf1f6; font-size: 14.5px; }
+.card-description { color: #818da1; font-size: 10.5px; }
+.card-meta { color: #79869a; font-size: 9px; }
+.card-meta strong { color: #b4bdca; }
+.card-icon { background: rgba(139,124,255,.12); color: #ab9fff; border: 1px solid rgba(139,124,255,.12); }
+.card-icon.green { background:rgba(61,213,152,.11); color:#62dda9; border-color:rgba(61,213,152,.10); }
+.card-icon.orange { background:rgba(245,166,79,.11); color:#ffb867; border-color:rgba(245,166,79,.10); }
+.card-icon.blue { background:rgba(92,156,255,.11); color:#77adff; border-color:rgba(92,156,255,.10); }
+.badge { border: 1px solid transparent; font-size: 8.5px; }
+.badge.green { color:#62dfa9; background:rgba(61,213,152,.10); border-color:rgba(61,213,152,.12); }
+.badge.orange { color:#ffb765; background:rgba(245,166,79,.10); border-color:rgba(245,166,79,.12); }
+.badge.red { color:#ff8a94; background:rgba(255,107,120,.10); border-color:rgba(255,107,120,.12); }
+.badge.purple { color:#aa9fff; background:rgba(139,124,255,.11); border-color:rgba(139,124,255,.13); }
+.badge.gray { color:#8995a8; background:#171e29; border-color:#263041; }
+.badge.blue { color:#81b4ff; background:rgba(92,156,255,.10); border-color:rgba(92,156,255,.12); }
+.tag { background: #161d28; color: #8794a7; border: 1px solid #232d3e; font-size: 8px; }
+.card-footer { border-top-color: #202735; }
+.owner strong { color: #cbd2dc; font-size: 9px; }
+.owner span { color: #6e7b90; font-size: 8px; }
+.mini-btn { background: #171e29; color: #9aa5b6; border: 1px solid #252f40; }
+.mini-btn:hover { background: #1c2532; color: #d7dde6; border-color: #344158; }
+.mini-btn.primary { background:rgba(139,124,255,.11); color:#aa9fff; border-color:rgba(139,124,255,.16); }
+.mini-btn.success { background:rgba(61,213,152,.10); color:#66dca9; border-color:rgba(61,213,152,.14); }
+.mini-btn.danger { background:rgba(255,107,120,.10); color:#ff8d97; border-color:rgba(255,107,120,.14); }
+.price { color:#f4f6fa !important; }
+.price small { color:#7f8ba0; }
+.progress { background: #202735; }
+.progress > span { background: linear-gradient(90deg,#7361f1,#a093ff); }
+.empty-state { background:#0d121a; border-color:#2c3545; }
+.empty-symbol { background:rgba(139,124,255,.12); color:#ab9fff; }
+.empty-state h4 { color: #edf1f6; }
+.empty-state p { color:#748197; font-size:10.5px; }
+
+/* Tables */
+.table-panel { background:#0d121a; border-color:#202837; box-shadow: 0 13px 35px rgba(0,0,0,.13); }
+.data-table th { background:#111722; color:#758197; border-bottom-color:#242d3c; font-size:8.5px; }
+.data-table td { border-bottom-color:#1d2532; color:#9da8b8; font-size:9.5px; }
+.data-table tbody tr { transition:.13s ease; }
+.data-table tbody tr:hover { background:#111722; }
+.table-user strong { color:#e5eaf1; font-size:9.5px; }
+.table-user span { color:#707d92; font-size:8px; }
+
+/* Forms and modals */
+.modal-backdrop { background:rgba(1,3,7,.74); backdrop-filter:blur(9px); }
+.modal, .confirm-card {
+  background: linear-gradient(145deg,#121822,#0b1017);
+  border:1px solid #283244;
+  color:#eef2f7;
+  box-shadow:0 35px 90px rgba(0,0,0,.58), inset 0 1px 0 rgba(255,255,255,.025);
+}
+.modal-head { background:#111720; border-bottom-color:#242d3c; }
+.modal-head h3 { color:#f0f3f8; }
+.modal-close { background:#1b2330; color:#93a0b4; border:1px solid #2a3547; }
+.modal-close:hover { color:#fff; background:#232d3c; }
+.form-field > span { color:#aab4c4; font-size:9.5px; }
+.form-field input, .form-field select, .form-field textarea {
+  background:#0a0f16;
+  border-color:#273143;
+  color:#e8edf4;
+  font-size:10.5px;
+}
+.form-field input::placeholder, .form-field textarea::placeholder { color:#536075; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color:#685ad4; box-shadow:0 0 0 3px rgba(139,124,255,.08); }
+.form-field select option { background:#0a0f16; color:#e8edf4; }
+.form-help { color:#68758a; }
+.check-card { border-color:#252f40; background:#0c1118; color:#98a4b7; }
+.check-card:hover { border-color:#39465d; }
+.modal-actions { background:#101620; border-top-color:#242d3c; }
+.confirm-symbol { background:rgba(255,107,120,.11); color:#ff8792; }
+.confirm-card p { color:#8490a3; font-size:10.5px; }
+
+/* Buttons */
+.button { border:1px solid transparent; }
+.button.primary { background:linear-gradient(135deg,#897aff,#6554ec); color:#fff; box-shadow:0 12px 26px rgba(76,61,193,.24); }
+.button.primary:hover { box-shadow:0 15px 32px rgba(76,61,193,.32); }
+.button.ghost { color:#a3adbd; background:#171e29; border-color:#252f40; }
+.button.ghost:hover { background:#1d2633; color:#e1e6ed; }
+.button.outline { color:#a99eff; background:#0d121a; border-color:#3f3967; }
+.button.outline:hover { background:rgba(139,124,255,.08); }
+.button.success { color:#69dfad; background:rgba(61,213,152,.10); border-color:rgba(61,213,152,.16); }
+.button.danger { background:#dc5360; color:white; box-shadow:0 10px 24px rgba(220,83,96,.16); }
+
+/* Feedback */
+.toast { background:#111722; border:1px solid #293345; box-shadow:0 18px 50px rgba(0,0,0,.38); }
+.toast span { color:#8491a4; }
+.toast button { color:#6d7a90; }
+.spinner { border-color:#283143; border-top-color:#8b7cff; }
+
+@media (max-width: 900px) {
+  .login-panel-wrap { background:#070a0f; border-left:0; }
+  .login-panel { width:min(100%,520px); }
+  .sidebar { width:264px; box-shadow:25px 0 60px rgba(0,0,0,.45); }
+  .sidebar-overlay { background:rgba(0,0,0,.68); backdrop-filter:blur(3px); }
+  .main-area { grid-column:1; }
+}
+
+@media (max-width: 700px) {
+  .login-panel { padding:26px 22px; border-radius:22px; }
+  .content { padding:22px 18px 40px; }
+  .hero-panel { padding:26px 24px; }
+}
+
+@media (max-width: 480px) {
+  .login-panel { padding:22px 17px; }
+  .mobile-brand { margin-bottom:40px; }
+  .content { padding:18px 13px 34px; }
+}
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <section id="loginScreen" class="login-screen">
+      <div class="login-bg login-bg-a"></div>
+      <div class="login-bg login-bg-b"></div>
+      <div class="login-layout">
+        <div class="login-showcase">
+          <div class="brand brand-light">
+            <div class="brand-mark">CC</div>
+            <div>
+              <strong>Campus Connect</strong>
+              <span>East West University</span>
+            </div>
+          </div>
+          <div class="showcase-copy">
+            <span class="eyebrow">CSE302 · Database Systems</span>
+            <h1>Your campus, connected in one place.</h1>
+            <p>Discover resources, build project teams, find lost items, trade essentials and join events — with separate experiences for students, teachers and administrators.</p>
+          </div>
+          <div class="showcase-grid">
+            <article><span>01</span><strong>Marketplace</strong><small>Buy & sell campus essentials</small></article>
+            <article><span>02</span><strong>Team Finder</strong><small>Build better project teams</small></article>
+            <article><span>03</span><strong>Resources</strong><small>Share course materials</small></article>
+            <article><span>04</span><strong>Events</strong><small>Stay involved on campus</small></article>
+          </div>
+        </div>
+
+        <div class="login-panel-wrap">
+          <div class="login-panel">
+            <div class="mobile-brand brand">
+              <div class="brand-mark">CC</div>
+              <div><strong>Campus Connect</strong><span>East West University</span></div>
+            </div>
+            <span class="eyebrow dark">Welcome back</span>
+            <h2>Sign in to continue</h2>
+            <p class="muted">Use your Campus Connect account or choose a demo role.</p>
+
+            <form id="loginForm" class="form-stack" autocomplete="on">
+              <label class="field">
+                <span>Email address</span>
+                <div class="input-wrap">
+                  <span class="input-icon">@</span>
+                  <input id="loginEmail" name="email" type="email" autocomplete="username" placeholder="student@campusconnect.local" required />
+                </div>
+              </label>
+              <label class="field">
+                <span>Password</span>
+                <div class="input-wrap">
+                  <span class="input-icon">●</span>
+                  <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required />
+                  <button class="icon-button password-toggle" type="button" id="togglePassword" aria-label="Show password">Show</button>
+                </div>
+              </label>
+              <button id="loginButton" class="button primary wide" type="submit">Sign In <span>→</span></button>
+            </form>
+
+            <div class="demo-divider"><span>Quick demo access</span></div>
+            <div class="demo-roles">
+              <button class="demo-role" data-demo="student">
+                <span class="role-icon student">S</span>
+                <span><strong>Student</strong><small>Explore & contribute</small></span>
+              </button>
+              <button class="demo-role" data-demo="teacher">
+                <span class="role-icon teacher">T</span>
+                <span><strong>Teacher</strong><small>Resources & events</small></span>
+              </button>
+              <button class="demo-role" data-demo="admin">
+                <span class="role-icon admin">A</span>
+                <span><strong>Admin</strong><small>Manage everything</small></span>
+              </button>
+            </div>
+            <p class="login-note">Academic demo project · Data is stored in MySQL</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mainApp" class="app-shell hidden">
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar-head">
+          <div class="brand brand-light">
+            <div class="brand-mark small">CC</div>
+            <div><strong>Campus Connect</strong><span>EWU Community</span></div>
+          </div>
+          <button id="closeSidebar" class="sidebar-close" aria-label="Close menu">×</button>
+        </div>
+
+        <nav id="mainNav" class="nav-list">
+          <button class="nav-item active" data-page="dashboard"><span class="nav-icon">⌂</span><span>Dashboard</span></button>
+          <button class="nav-item" data-page="marketplace"><span class="nav-icon">▣</span><span>Marketplace</span></button>
+          <button class="nav-item" data-page="projects"><span class="nav-icon">♢</span><span>Team Finder</span></button>
+          <button class="nav-item" data-page="resources"><span class="nav-icon">≡</span><span>Resources</span></button>
+          <button class="nav-item" data-page="lostfound"><span class="nav-icon">⌕</span><span>Lost & Found</span></button>
+          <button class="nav-item" data-page="events"><span class="nav-icon">◫</span><span>Events</span></button>
+          <button class="nav-item admin-only hidden" data-page="users"><span class="nav-icon">♙</span><span>User Management</span></button>
+        </nav>
+
+        <div class="sidebar-card">
+          <span class="tiny-label">DATABASE PROJECT</span>
+          <strong>CSE302 Final</strong>
+          <p>16 normalized tables · CRUD · 3 roles</p>
+        </div>
+
+        <div class="sidebar-user">
+          <div id="sidebarAvatar" class="avatar">U</div>
+          <div class="sidebar-user-copy">
+            <strong id="sidebarName">User</strong>
+            <span id="sidebarRole">Role</span>
+          </div>
+          <button id="logoutButton" class="logout-button" title="Sign out">↪</button>
+        </div>
+      </aside>
+
+      <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button id="menuButton" class="menu-button" aria-label="Open menu">☰</button>
+            <div>
+              <p id="pageKicker" class="page-kicker">Overview</p>
+              <h2 id="pageTitle">Dashboard</h2>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <div class="date-pill" id="todayLabel"></div>
+            <button id="profileButton" class="profile-chip">
+              <span id="topAvatar" class="avatar tiny">U</span>
+              <span class="profile-chip-copy"><strong id="topName">User</strong><small id="topRole">Role</small></span>
+              <span>⌄</span>
+            </button>
+          </div>
+        </header>
+
+        <div id="content" class="content"></div>
+      </main>
+    </section>
+  </div>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden">
+    <div id="modal" class="modal" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <div>
+          <span id="modalEyebrow" class="eyebrow dark">Campus Connect</span>
+          <h3 id="modalTitle">Form</h3>
+        </div>
+        <button id="modalClose" class="modal-close" aria-label="Close">×</button>
+      </div>
+      <form id="modalForm">
+        <div id="modalBody" class="modal-body"></div>
+        <div class="modal-actions">
+          <button id="modalCancel" type="button" class="button ghost">Cancel</button>
+          <button id="modalSubmit" type="submit" class="button primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="confirmBackdrop" class="modal-backdrop hidden">
+    <div class="confirm-card">
+      <div class="confirm-symbol">!</div>
+      <h3 id="confirmTitle">Are you sure?</h3>
+      <p id="confirmMessage">This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button id="confirmCancel" class="button ghost">Cancel</button>
+        <button id="confirmOk" class="button danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastStack" class="toast-stack"></div>
+  <script>
+const state = {
+  user: null,
+  meta: { categories: [], courses: [], departments: [], roles: [], skills: [] },
+  page: 'dashboard',
+  cache: {},
+  modalSubmitHandler: null,
+  searchTimer: null
+};
+
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+function esc(value = '') {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function initials(name = 'User') {
+  return name.split(/\s+/).filter(Boolean).slice(0, 2).map(p => p[0]).join('').toUpperCase() || 'U';
+}
+
+function fmtDate(value, withTime = false) {
+  if (!value) return '—';
+  const d = new Date(String(value).replace(' ', 'T'));
+  if (Number.isNaN(d.getTime())) return esc(value);
+  return new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric',
+    ...(withTime ? { hour: '2-digit', minute: '2-digit' } : {})
+  }).format(d);
+}
+
+function dateParts(value) {
+  if (!value) return { day: '--', mon: '---' };
+  const d = new Date(String(value).replace(' ', 'T'));
+  return {
+    day: String(d.getDate()).padStart(2, '0'),
+    mon: d.toLocaleString('en', { month: 'short' }).toUpperCase()
+  };
+}
+
+function inputDateTime(value) {
+  if (!value) return '';
+  return String(value).replace(' ', 'T').slice(0, 16);
+}
+
+function inputDate(value) {
+  return value ? String(value).slice(0, 10) : new Date().toISOString().slice(0, 10);
+}
+
+function money(value) {
+  const n = Number(value || 0);
+  return new Intl.NumberFormat('en-BD', { maximumFractionDigits: 0 }).format(n);
+}
+
+async function api(url, options = {}) {
+  const opts = { credentials: 'same-origin', ...options };
+  if (opts.body && !(opts.body instanceof FormData)) {
+    opts.headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
+    if (typeof opts.body !== 'string') opts.body = JSON.stringify(opts.body);
+  }
+  const res = await fetch(url, opts);
+  let data = {};
+  try { data = await res.json(); } catch (_) {}
+  if (!res.ok) {
+    if (res.status === 401 && state.user) signOutLocal();
+    throw new Error(data.error || `Request failed (${res.status})`);
+  }
+  return data;
+}
+
+function toast(message, type = 'success', title = type === 'error' ? 'Could not complete' : 'Done') {
+  const stack = $('#toastStack');
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `
+    <div class="toast-icon">${type === 'error' ? '!' : '✓'}</div>
+    <div><strong>${esc(title)}</strong><span>${esc(message)}</span></div>
+    <button aria-label="Dismiss">×</button>
+  `;
+  stack.append(el);
+  $('button', el).onclick = () => el.remove();
+  setTimeout(() => el.remove(), 4200);
+}
+
+function setLoading() {
+  $('#content').innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+}
+
+function setPageHeading(title, kicker = 'Campus Connect') {
+  $('#pageTitle').textContent = title;
+  $('#pageKicker').textContent = kicker;
+}
+
+function updateUserUI() {
+  const user = state.user;
+  const ini = initials(user.name);
+  $('#sidebarName').textContent = user.name;
+  $('#sidebarRole').textContent = user.role;
+  $('#topName').textContent = user.name;
+  $('#topRole').textContent = user.role;
+  $('#sidebarAvatar').textContent = ini;
+  $('#topAvatar').textContent = ini;
+  $$('.admin-only').forEach(el => el.classList.toggle('hidden', user.role !== 'Admin'));
+}
+
+function openSidebar() {
+  $('#sidebar').classList.add('open');
+  $('#sidebarOverlay').classList.add('open');
+}
+function closeSidebar() {
+  $('#sidebar').classList.remove('open');
+  $('#sidebarOverlay').classList.remove('open');
+}
+
+function roleIntro() {
+  if (state.user.role === 'Admin') return 'Monitor the campus platform, manage users and keep every module organized.';
+  if (state.user.role === 'Teacher') return 'Share academic resources, support project teams and create campus events.';
+  return 'Find what you need, connect with classmates and make campus life easier today.';
+}
+
+async function login(email, password) {
+  const btn = $('#loginButton');
+  btn.disabled = true;
+  btn.innerHTML = 'Signing In…';
+  try {
+    const { user } = await api('/api/auth/login', { method: 'POST', body: { email, password } });
+    state.user = user;
+    state.meta = await api('/api/meta');
+    enterApp();
+    toast(`Welcome, ${user.name}.`);
+  } catch (error) {
+    toast(error.message, 'error', 'Sign in failed');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Sign In <span>→</span>';
+  }
+}
+
+function enterApp() {
+  $('#loginScreen').classList.add('hidden');
+  $('#mainApp').classList.remove('hidden');
+  $('#todayLabel').textContent = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: '2-digit', month: 'short' }).format(new Date());
+  updateUserUI();
+  navigate('dashboard');
+}
+
+function signOutLocal() {
+  state.user = null;
+  state.cache = {};
+  $('#mainApp').classList.add('hidden');
+  $('#loginScreen').classList.remove('hidden');
+  $('#loginPassword').value = '';
+}
+
+async function logout() {
+  try { await api('/api/auth/logout', { method: 'POST' }); } catch (_) {}
+  signOutLocal();
+}
+
+function navigate(page) {
+  if (page === 'users' && state.user.role !== 'Admin') page = 'dashboard';
+  state.page = page;
+  $$('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page === page));
+  closeSidebar();
+  const renderers = {
+    dashboard: renderDashboard,
+    marketplace: renderMarketplace,
+    projects: renderProjects,
+    resources: renderResources,
+    lostfound: renderLostFound,
+    events: renderEvents,
+    users: renderUsers
+  };
+  setLoading();
+  renderers[page]().catch(err => {
+    $('#content').innerHTML = errorState(err.message);
+    toast(err.message, 'error');
+  });
+}
+
+function errorState(msg) {
+  return `<div class="empty-state"><div class="empty-symbol">!</div><h4>Could not load this page</h4><p>${esc(msg)}</p></div>`;
+}
+
+function emptyState(icon, title, message) {
+  return `<div class="empty-state"><div class="empty-symbol">${icon}</div><h4>${esc(title)}</h4><p>${esc(message)}</p></div>`;
+}
+
+function statCard(icon, color, label, value) {
+  return `<div class="stat-card"><div class="stat-icon ${color}">${icon}</div><div class="stat-copy"><span>${esc(label)}</span><strong>${esc(value)}</strong></div></div>`;
+}
+
+async function renderDashboard() {
+  setPageHeading('Dashboard', 'Overview');
+  const data = await api('/api/dashboard');
+  state.cache.dashboard = data;
+  const c = data.counts;
+  const showUsers = state.user.role === 'Admin';
+  const stats = [
+    statCard('▣', 'purple', 'Available Items', c.marketplace),
+    statCard('♢', 'green', 'Open Projects', c.open_projects),
+    statCard('≡', 'orange', 'Study Resources', c.resources),
+    statCard('⌕', 'blue', 'Open Reports', c.open_reports),
+    statCard(showUsers ? '♙' : '◫', 'cyan', showUsers ? 'Campus Users' : 'Upcoming Events', showUsers ? c.users : c.upcoming_events)
+  ].join('');
+
+  const eventRows = data.upcoming.length ? data.upcoming.map(e => {
+    const dp = dateParts(e.event_date);
+    return `<div class="event-mini">
+      <div class="date-box"><strong>${dp.day}</strong><span>${dp.mon}</span></div>
+      <div class="event-mini-copy"><strong>${esc(e.event_name)}</strong><span>${esc(e.venue || 'Venue TBA')} · by ${esc(e.creator_name)}</span></div>
+      <div class="event-mini-meta"><strong>${e.registered}/${e.capacity}</strong><span>registered</span></div>
+    </div>`;
+  }).join('') : '<div class="event-mini"><div class="event-mini-copy"><strong>No upcoming events</strong><span>New campus events will appear here.</span></div></div>';
+
+  $('#content').innerHTML = `
+    <section class="hero-panel">
+      <div class="hero-copy">
+        <span>${esc(state.user.role)} workspace</span>
+        <h3>Welcome back, ${esc(state.user.name.split(' ')[0])}.</h3>
+        <p>${esc(roleIntro())}</p>
+      </div>
+      <div class="hero-action"><button class="button" data-go="${state.user.role === 'Admin' ? 'users' : state.user.role === 'Teacher' ? 'events' : 'projects'}">${state.user.role === 'Admin' ? 'Manage Users' : state.user.role === 'Teacher' ? 'Create Event' : 'Find A Team'} →</button></div>
+    </section>
+    <section class="stats-grid">${stats}</section>
+    <section class="dashboard-grid">
+      <div class="panel">
+        <div class="panel-head"><div><h3>Upcoming Campus Events</h3><p>What is happening around EWU</p></div><button class="text-button" data-go="events">View all →</button></div>
+        <div class="event-mini-list">${eventRows}</div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><h3>Quick Actions</h3><p>Jump into common tasks</p></div></div>
+        <div class="quick-grid">
+          <button class="quick-action" data-action="quick-product"><span>＋</span><strong>Sell Item</strong><small>Post to marketplace</small></button>
+          <button class="quick-action" data-action="quick-project"><span>♢</span><strong>Start Project</strong><small>Find teammates</small></button>
+          <button class="quick-action" data-action="quick-resource"><span>≡</span><strong>Share Notes</strong><small>Add course resource</small></button>
+          <button class="quick-action" data-action="quick-lost"><span>⌕</span><strong>Report Item</strong><small>Lost or found</small></button>
+        </div>
+      </div>
+    </section>
+  `;
+
+  $$('[data-go]').forEach(b => b.onclick = () => navigate(b.dataset.go));
+  $$('[data-action]').forEach(b => b.onclick = () => {
+    const map = { 'quick-product': openProductForm, 'quick-project': openProjectForm, 'quick-resource': openResourceForm, 'quick-lost': openLostFoundForm };
+    map[b.dataset.action]?.();
+  });
+}
+
+function toolbar(title, description, opts = {}) {
+  return `
+    <div class="page-toolbar">
+      <div class="page-intro"><h3>${esc(title)}</h3><p>${esc(description)}</p></div>
+      <div class="toolbar-actions">
+        <label class="search-box"><span>⌕</span><input id="pageSearch" placeholder="${esc(opts.searchPlaceholder || 'Search...')}" value="${esc(opts.q || '')}" /></label>
+        ${opts.filterHtml || ''}
+        ${opts.addLabel ? `<button id="addButton" class="button primary">＋ ${esc(opts.addLabel)}</button>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function bindSearch(callback) {
+  const input = $('#pageSearch');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    clearTimeout(state.searchTimer);
+    state.searchTimer = setTimeout(() => callback(input.value.trim()), 280);
+  });
+}
+
+async function renderMarketplace(q = '', status = '') {
+  setPageHeading('Marketplace', 'Campus essentials');
+  const data = await api(`/api/products?q=${encodeURIComponent(q)}&status=${encodeURIComponent(status)}`);
+  state.cache.products = data.products;
+  const products = data.products;
+  const available = products.filter(x => x.status === 'Available').length;
+  const avg = available ? Math.round(products.filter(x => x.status === 'Available').reduce((a,b) => a + Number(b.price), 0) / available) : 0;
+  const mine = products.filter(x => Number(x.seller_id) === Number(state.user.user_id)).length;
+
+  const cards = products.length ? products.map(p => `
+    <article class="data-card">
+      <div class="card-top"><div class="card-icon">${esc(p.category_name?.slice(0,1) || 'M')}</div><span class="badge ${p.status === 'Available' ? 'green' : 'gray'}">${esc(p.status)}</span></div>
+      <h4>${esc(p.product_name)}</h4>
+      <p class="card-description">${esc(p.description || 'No description provided.')}</p>
+      <div class="card-meta"><span><strong>${esc(p.category_name)}</strong></span><span>${esc(p.item_condition)}</span><span>♡ ${p.wishlist_count}</span></div>
+      <div class="card-spacer"></div>
+      <div class="card-meta"><strong class="price">৳${money(p.price)} <small>BDT</small></strong></div>
+      <div class="card-footer">
+        <div class="owner"><strong>${esc(p.seller_name)}</strong><span>${esc(p.university_id || 'Campus user')}</span></div>
+        <div class="card-actions">
+          ${Number(p.seller_id) !== Number(state.user.user_id) ? `<button class="mini-btn primary" data-wish="${p.product_id}">♡ Save</button>` : ''}
+          ${p.can_edit ? `<button class="mini-btn" data-edit-product="${p.product_id}">Edit</button>` : ''}
+          ${p.can_delete ? `<button class="mini-btn danger" data-delete-product="${p.product_id}">Delete</button>` : ''}
+        </div>
+      </div>
+    </article>`).join('') : emptyState('▣', 'No marketplace items', 'Try another search or post a new campus item.');
+
+  $('#content').innerHTML = `
+    ${toolbar('Campus Marketplace','Buy and sell useful items within the EWU community.', {
+      q, addLabel:'Post Item', searchPlaceholder:'Search items or sellers...',
+      filterHtml:`<select id="statusFilter" class="filter-select"><option value="">All status</option><option ${status==='Available'?'selected':''}>Available</option><option ${status==='Sold'?'selected':''}>Sold</option></select>`
+    })}
+    <div class="module-summary">
+      <div class="mini-summary"><span>Showing Items</span><strong>${products.length}</strong></div>
+      <div class="mini-summary"><span>Available Now</span><strong>${available}</strong></div>
+      <div class="mini-summary"><span>Average Available Price</span><strong>৳${money(avg)}</strong></div>
+    </div>
+    <section class="cards-grid">${cards}</section>
+  `;
+  $('#addButton').onclick = () => openProductForm();
+  bindSearch(value => renderMarketplace(value, $('#statusFilter').value));
+  $('#statusFilter').onchange = () => renderMarketplace($('#pageSearch').value.trim(), $('#statusFilter').value);
+  $$('[data-edit-product]').forEach(b => b.onclick = () => openProductForm(products.find(p => p.product_id == b.dataset.editProduct)));
+  $$('[data-delete-product]').forEach(b => b.onclick = () => deleteRecord(`/api/products/${b.dataset.deleteProduct}`, 'Delete this marketplace item?', () => renderMarketplace($('#pageSearch')?.value || '', $('#statusFilter')?.value || '')));
+  $$('[data-wish]').forEach(b => b.onclick = async () => { try { const r=await api(`/api/products/${b.dataset.wish}/wishlist`,{method:'POST'}); toast(r.message); renderMarketplace(q,status); } catch(e){toast(e.message,'error');} });
+}
+
+async function renderProjects(q = '', status = '') {
+  setPageHeading('Team Finder', 'Collaboration hub');
+  const data = await api(`/api/projects?q=${encodeURIComponent(q)}&status=${encodeURIComponent(status)}`);
+  const projects = data.projects;
+  state.cache.projects = projects;
+  const open = projects.filter(p => p.status === 'Open').length;
+  const applications = projects.reduce((a,p) => a + Number(p.application_count || 0), 0);
+
+  const cards = projects.length ? projects.map(p => `
+    <article class="data-card">
+      <div class="card-top"><div class="card-icon green">♢</div><span class="badge ${p.status==='Open'?'green':'gray'}">${esc(p.status)}</span></div>
+      <h4>${esc(p.title)}</h4>
+      <p class="card-description">${esc(p.description || 'No project description.')}</p>
+      ${p.skills ? `<div class="card-tags">${p.skills.split(', ').map(s => `<span class="tag">${esc(s)}</span>`).join('')}</div>` : ''}
+      <div class="card-spacer"></div>
+      <div class="card-meta"><span><strong>${p.application_count}</strong> application${Number(p.application_count)===1?'':'s'}</span><span>Posted ${fmtDate(p.created_at)}</span></div>
+      <div class="card-footer">
+        <div class="owner"><strong>${esc(p.creator_name)}</strong><span>${esc(p.university_id || 'Campus user')}</span></div>
+        <div class="card-actions">
+          ${p.can_apply ? `<button class="mini-btn success" data-apply-project="${p.project_id}">Apply</button>` : p.applied ? `<span class="badge purple">Applied</span>` : ''}
+          ${(p.can_edit || state.user.role === 'Teacher') ? `<button class="mini-btn primary" data-apps-project="${p.project_id}">Applications</button>` : ''}
+          ${p.can_edit ? `<button class="mini-btn" data-edit-project="${p.project_id}">Edit</button>` : ''}
+          ${p.can_delete ? `<button class="mini-btn danger" data-delete-project="${p.project_id}">Delete</button>` : ''}
+        </div>
+      </div>
+    </article>`).join('') : emptyState('♢','No projects found','Create a project or change your search to find a team.');
+
+  $('#content').innerHTML = `
+    ${toolbar('Find Your Project Team','Connect with students who have the skills your project needs.',{
+      q, addLabel:'Create Project', searchPlaceholder:'Search projects, skills, people...',
+      filterHtml:`<select id="statusFilter" class="filter-select"><option value="">All projects</option><option ${status==='Open'?'selected':''}>Open</option><option ${status==='Closed'?'selected':''}>Closed</option></select>`
+    })}
+    <div class="module-summary"><div class="mini-summary"><span>Showing Projects</span><strong>${projects.length}</strong></div><div class="mini-summary"><span>Open For Teammates</span><strong>${open}</strong></div><div class="mini-summary"><span>Total Applications</span><strong>${applications}</strong></div></div>
+    <section class="cards-grid">${cards}</section>
+  `;
+  $('#addButton').onclick = () => openProjectForm();
+  bindSearch(value => renderProjects(value, $('#statusFilter').value));
+  $('#statusFilter').onchange = () => renderProjects($('#pageSearch').value.trim(), $('#statusFilter').value);
+  $$('[data-edit-project]').forEach(b => b.onclick = () => openProjectForm(projects.find(p => p.project_id == b.dataset.editProject)));
+  $$('[data-delete-project]').forEach(b => b.onclick = () => deleteRecord(`/api/projects/${b.dataset.deleteProject}`, 'Delete this project and its applications?', () => renderProjects(q,status)));
+  $$('[data-apply-project]').forEach(b => b.onclick = () => openApplicationForm(b.dataset.applyProject));
+  $$('[data-apps-project]').forEach(b => b.onclick = () => openApplications(b.dataset.appsProject));
+}
+
+async function renderResources(q = '', courseId = '') {
+  setPageHeading('Resources', 'Academic library');
+  const data = await api(`/api/resources?q=${encodeURIComponent(q)}&course_id=${encodeURIComponent(courseId)}`);
+  const resources = data.resources;
+  state.cache.resources = resources;
+  const downloads = resources.reduce((a,r) => a + Number(r.download_count || 0),0);
+  const uniqueCourses = new Set(resources.map(r => r.course_id)).size;
+  const courseOptions = state.meta.courses.map(c => `<option value="${c.course_id}" ${String(courseId)===String(c.course_id)?'selected':''}>${esc(c.course_code)}</option>`).join('');
+
+  const cards = resources.length ? resources.map(r => `
+    <article class="data-card">
+      <div class="card-top"><div class="card-icon orange">≡</div><span class="badge orange">${esc(r.resource_type)}</span></div>
+      <h4>${esc(r.title)}</h4>
+      <p class="card-description"><strong>${esc(r.course_code)}</strong> · ${esc(r.course_name)}</p>
+      <div class="card-meta"><span>Uploaded ${fmtDate(r.upload_date)}</span><span>↓ ${r.download_count} downloads</span></div>
+      <div class="card-spacer"></div>
+      <div class="card-footer">
+        <div class="owner"><strong>${esc(r.uploader_name)}</strong><span>${esc(r.university_id || 'Campus user')}</span></div>
+        <div class="card-actions">
+          ${r.file_url ? `<button class="mini-btn primary" data-open-resource="${r.resource_id}">Open</button>` : ''}
+          ${r.can_edit ? `<button class="mini-btn" data-edit-resource="${r.resource_id}">Edit</button>` : ''}
+          ${r.can_delete ? `<button class="mini-btn danger" data-delete-resource="${r.resource_id}">Delete</button>` : ''}
+        </div>
+      </div>
+    </article>`).join('') : emptyState('≡','No resources found','Share a course note, practice sheet or useful academic link.');
+
+  $('#content').innerHTML = `
+    ${toolbar('Study Resource Library','Course materials shared by students and teachers.',{
+      q, addLabel:'Share Resource', searchPlaceholder:'Search notes, course, uploader...',
+      filterHtml:`<select id="courseFilter" class="filter-select"><option value="">All courses</option>${courseOptions}</select>`
+    })}
+    <div class="module-summary"><div class="mini-summary"><span>Resources Shown</span><strong>${resources.length}</strong></div><div class="mini-summary"><span>Courses Covered</span><strong>${uniqueCourses}</strong></div><div class="mini-summary"><span>Total Downloads</span><strong>${downloads}</strong></div></div>
+    <section class="cards-grid">${cards}</section>
+  `;
+  $('#addButton').onclick = () => openResourceForm();
+  bindSearch(value => renderResources(value, $('#courseFilter').value));
+  $('#courseFilter').onchange = () => renderResources($('#pageSearch').value.trim(), $('#courseFilter').value);
+  $$('[data-edit-resource]').forEach(b => b.onclick = () => openResourceForm(resources.find(r => r.resource_id == b.dataset.editResource)));
+  $$('[data-delete-resource]').forEach(b => b.onclick = () => deleteRecord(`/api/resources/${b.dataset.deleteResource}`, 'Delete this study resource?', () => renderResources(q,courseId)));
+  $$('[data-open-resource]').forEach(b => b.onclick = async () => {
+    try {
+      const r = await api(`/api/resources/${b.dataset.openResource}/download`, { method:'POST' });
+      if (r.file_url) window.open(r.file_url, '_blank', 'noopener');
+      renderResources(q,courseId);
+    } catch(e){toast(e.message,'error');}
+  });
+}
+
+async function renderLostFound(q = '', type = '', status = '') {
+  setPageHeading('Lost & Found', 'Campus recovery');
+  const data = await api(`/api/lost-found?q=${encodeURIComponent(q)}&type=${encodeURIComponent(type)}&status=${encodeURIComponent(status)}`);
+  const reports = data.reports;
+  state.cache.reports = reports;
+  const lost = reports.filter(r => r.report_type === 'Lost').length;
+  const found = reports.filter(r => r.report_type === 'Found').length;
+  const open = reports.filter(r => r.status === 'Open').length;
+
+  const cards = reports.length ? reports.map(r => `
+    <article class="data-card">
+      <div class="card-top"><div class="card-icon ${r.report_type==='Found'?'green':'blue'}">${r.report_type==='Found'?'✓':'?'}</div><span class="badge ${r.report_type==='Found'?'green':'blue'}">${esc(r.report_type)}</span></div>
+      <h4>${esc(r.item_name)}</h4>
+      <p class="card-description">${esc(r.description || 'No additional details.')}</p>
+      <div class="card-meta"><span><strong>⌖ ${esc(r.location || 'Location not specified')}</strong></span><span>${fmtDate(r.report_date)}</span></div>
+      <div class="card-spacer"></div>
+      <div class="card-footer">
+        <div class="owner"><strong>${esc(r.reporter_name)}</strong><span><span class="badge ${r.status==='Open'?'orange':'gray'}">${esc(r.status)}</span></span></div>
+        <div class="card-actions">
+          ${r.can_edit ? `<button class="mini-btn" data-edit-report="${r.report_id}">Edit</button>` : ''}
+          ${r.can_delete ? `<button class="mini-btn danger" data-delete-report="${r.report_id}">Delete</button>` : ''}
+        </div>
+      </div>
+    </article>`).join('') : emptyState('⌕','No reports found','Try a different filter or create a Lost & Found report.');
+
+  $('#content').innerHTML = `
+    ${toolbar('Help Items Find Their Way Home','Report missing belongings or items you found around campus.',{
+      q, addLabel:'New Report', searchPlaceholder:'Search item, place, reporter...',
+      filterHtml:`<select id="typeFilter" class="filter-select"><option value="">Lost & Found</option><option ${type==='Lost'?'selected':''}>Lost</option><option ${type==='Found'?'selected':''}>Found</option></select><select id="statusFilter" class="filter-select"><option value="">All status</option><option ${status==='Open'?'selected':''}>Open</option><option ${status==='Resolved'?'selected':''}>Resolved</option></select>`
+    })}
+    <div class="module-summary"><div class="mini-summary"><span>Lost Reports</span><strong>${lost}</strong></div><div class="mini-summary"><span>Found Reports</span><strong>${found}</strong></div><div class="mini-summary"><span>Still Open</span><strong>${open}</strong></div></div>
+    <section class="cards-grid">${cards}</section>
+  `;
+  $('#addButton').onclick = () => openLostFoundForm();
+  bindSearch(value => renderLostFound(value, $('#typeFilter').value, $('#statusFilter').value));
+  $('#typeFilter').onchange = $('#statusFilter').onchange = () => renderLostFound($('#pageSearch').value.trim(), $('#typeFilter').value, $('#statusFilter').value);
+  $$('[data-edit-report]').forEach(b => b.onclick = () => openLostFoundForm(reports.find(r => r.report_id == b.dataset.editReport)));
+  $$('[data-delete-report]').forEach(b => b.onclick = () => deleteRecord(`/api/lost-found/${b.dataset.deleteReport}`, 'Delete this Lost & Found report?', () => renderLostFound(q,type,status)));
+}
+
+async function renderEvents(q = '') {
+  setPageHeading('Events', 'Campus calendar');
+  const data = await api(`/api/events?q=${encodeURIComponent(q)}`);
+  const events = data.events;
+  state.cache.events = events;
+  const upcoming = events.filter(e => new Date(String(e.event_date).replace(' ','T')) > new Date()).length;
+  const registered = events.filter(e => Number(e.is_registered)).length;
+  const totalSeats = events.reduce((a,e) => a + Math.max(0, Number(e.capacity)-Number(e.registered)),0);
+  const canCreate = ['Teacher','Admin'].includes(state.user.role);
+
+  const cards = events.length ? events.map(e => {
+    const dp = dateParts(e.event_date);
+    const pct = Math.min(100, Math.round((Number(e.registered)/Number(e.capacity))*100));
+    return `<article class="data-card">
+      <div class="card-top"><div class="date-box"><strong>${dp.day}</strong><span>${dp.mon}</span></div><span class="badge purple">${fmtDate(e.event_date,true).split(',').slice(-1)[0] || ''}</span></div>
+      <h4>${esc(e.event_name)}</h4>
+      <p class="card-description">${esc(e.description || 'No event description.')}</p>
+      <div class="card-meta"><span><strong>⌖ ${esc(e.venue || 'Venue TBA')}</strong></span><span>Deadline ${fmtDate(e.registration_deadline,true)}</span></div>
+      <div class="progress"><span style="width:${pct}%"></span></div>
+      <div class="card-meta"><span><strong>${e.registered}/${e.capacity}</strong> registered</span><span>${Math.max(0, Number(e.capacity)-Number(e.registered))} seats left</span></div>
+      <div class="card-spacer"></div>
+      <div class="card-footer">
+        <div class="owner"><strong>${esc(e.creator_name)}</strong><span>Event organizer</span></div>
+        <div class="card-actions">
+          ${e.can_register ? `<button class="mini-btn success" data-register-event="${e.event_id}">Register</button>` : Number(e.is_registered) ? `<button class="mini-btn primary" data-cancel-event="${e.event_id}">Registered ✓</button>` : ''}
+          ${e.can_edit ? `<button class="mini-btn" data-edit-event="${e.event_id}">Edit</button>` : ''}
+          ${e.can_delete ? `<button class="mini-btn danger" data-delete-event="${e.event_id}">Delete</button>` : ''}
+        </div>
+      </div>
+    </article>`;
+  }).join('') : emptyState('◫','No events found','Create a campus event or adjust your search.');
+
+  $('#content').innerHTML = `
+    ${toolbar('Campus Events','Discover workshops, meetups and activities across EWU.',{q, addLabel:canCreate?'Create Event':null, searchPlaceholder:'Search events or venues...'})}
+    <div class="module-summary"><div class="mini-summary"><span>Upcoming Events</span><strong>${upcoming}</strong></div><div class="mini-summary"><span>My Registrations</span><strong>${registered}</strong></div><div class="mini-summary"><span>Seats Available</span><strong>${totalSeats}</strong></div></div>
+    <section class="cards-grid">${cards}</section>
+  `;
+  if (canCreate) $('#addButton').onclick = () => openEventForm();
+  bindSearch(value => renderEvents(value));
+  $$('[data-edit-event]').forEach(b => b.onclick = () => openEventForm(events.find(e => e.event_id == b.dataset.editEvent)));
+  $$('[data-delete-event]').forEach(b => b.onclick = () => deleteRecord(`/api/events/${b.dataset.deleteEvent}`, 'Delete this event and all registrations?', () => renderEvents(q)));
+  $$('[data-register-event]').forEach(b => b.onclick = async () => { try { const r=await api(`/api/events/${b.dataset.registerEvent}/register`,{method:'POST'});toast(r.message);renderEvents(q); }catch(e){toast(e.message,'error');} });
+  $$('[data-cancel-event]').forEach(b => b.onclick = async () => { try { const r=await api(`/api/events/${b.dataset.cancelEvent}/register`,{method:'DELETE'});toast(r.message);renderEvents(q); }catch(e){toast(e.message,'error');} });
+}
+
+async function renderUsers(q = '') {
+  setPageHeading('User Management', 'Administrator');
+  const data = await api(`/api/users?q=${encodeURIComponent(q)}`);
+  const users = data.users;
+  state.cache.users = users;
+  const roleCount = role => users.filter(u => u.role === role).length;
+
+  const rows = users.length ? users.map(u => `
+    <tr>
+      <td><div class="table-user"><div class="avatar">${initials(u.name)}</div><div><strong>${esc(u.name)}</strong><span>${esc(u.university_id || 'No university ID')}</span></div></div></td>
+      <td>${esc(u.email)}</td>
+      <td>${esc(u.dept_code || '—')}</td>
+      <td><span class="badge ${u.role==='Admin'?'orange':u.role==='Teacher'?'green':'purple'}">${esc(u.role)}</span></td>
+      <td>${fmtDate(u.created_at)}</td>
+      <td><div class="card-actions"><button class="mini-btn" data-edit-user="${u.user_id}">Edit</button>${Number(u.user_id)!==Number(state.user.user_id)?`<button class="mini-btn danger" data-delete-user="${u.user_id}">Delete</button>`:''}</div></td>
+    </tr>`).join('') : `<tr><td colspan="6">No users found.</td></tr>`;
+
+  $('#content').innerHTML = `
+    ${toolbar('Manage Campus Accounts','Create, update and remove Student, Teacher and Admin accounts.',{q,addLabel:'Add User',searchPlaceholder:'Search name, email, ID, department...'})}
+    <div class="module-summary"><div class="mini-summary"><span>Students</span><strong>${roleCount('Student')}</strong></div><div class="mini-summary"><span>Teachers</span><strong>${roleCount('Teacher')}</strong></div><div class="mini-summary"><span>Administrators</span><strong>${roleCount('Admin')}</strong></div></div>
+    <section class="table-panel"><div class="table-wrap"><table class="data-table"><thead><tr><th>User</th><th>Email</th><th>Department</th><th>Role</th><th>Joined</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table></div></section>
+  `;
+  $('#addButton').onclick = () => openUserForm();
+  bindSearch(value => renderUsers(value));
+  $$('[data-edit-user]').forEach(b => b.onclick = () => openUserForm(users.find(u => u.user_id == b.dataset.editUser)));
+  $$('[data-delete-user]').forEach(b => b.onclick = () => deleteRecord(`/api/users/${b.dataset.deleteUser}`, 'Delete this user and their dependent records?', () => renderUsers(q)));
+}
+
+function optionList(items, valueKey, labelFn, selected) {
+  return items.map(item => `<option value="${esc(item[valueKey])}" ${String(item[valueKey])===String(selected)?'selected':''}>${esc(labelFn(item))}</option>`).join('');
+}
+
+function field(label, name, value = '', opts = {}) {
+  const full = opts.full ? ' full' : '';
+  const required = opts.required ? ' required' : '';
+  let control = '';
+  if (opts.type === 'textarea') control = `<textarea name="${name}" placeholder="${esc(opts.placeholder || '')}"${required}>${esc(value || '')}</textarea>`;
+  else if (opts.type === 'select') control = `<select name="${name}"${required}>${opts.options || ''}</select>`;
+  else control = `<input name="${name}" type="${opts.type || 'text'}" value="${esc(value ?? '')}" placeholder="${esc(opts.placeholder || '')}" ${opts.min !== undefined ? `min="${opts.min}"` : ''}${opts.step ? ` step="${opts.step}"` : ''}${required} />`;
+  return `<label class="form-field${full}"><span>${esc(label)}${opts.required?' *':''}</span>${control}${opts.help?`<small class="form-help">${esc(opts.help)}</small>`:''}</label>`;
+}
+
+function openModal({ title, eyebrow = 'Campus Connect', body, submitLabel = 'Save', onSubmit, hideSubmit = false }) {
+  $('#modalTitle').textContent = title;
+  $('#modalEyebrow').textContent = eyebrow;
+  $('#modalBody').innerHTML = body;
+  $('#modalSubmit').textContent = submitLabel;
+  $('#modalSubmit').classList.toggle('hidden', hideSubmit);
+  state.modalSubmitHandler = onSubmit || null;
+  $('#modalBackdrop').classList.remove('hidden');
+  setTimeout(() => $('#modalBody input, #modalBody select, #modalBody textarea')?.focus(), 40);
+}
+
+function closeModal() {
+  $('#modalBackdrop').classList.add('hidden');
+  $('#modalForm').reset();
+  $('#modalBody').innerHTML = '';
+  $('#modalSubmit').classList.remove('hidden');
+  state.modalSubmitHandler = null;
+}
+
+function formDataObject(form) {
+  return Object.fromEntries(new FormData(form).entries());
+}
+
+function openProductForm(item = null) {
+  const body = [
+    field('Product Name','product_name',item?.product_name,{required:true}),
+    field('Category','category_id',item?.category_id,{type:'select',required:true,options:`<option value="">Choose category</option>${optionList(state.meta.categories,'category_id',x=>x.category_name,item?.category_id)}`}),
+    field('Price (BDT)','price',item?.price,{type:'number',min:0,step:'0.01',required:true}),
+    field('Condition','item_condition',item?.item_condition,{type:'select',required:true,options:['Like New','Good','Fair','Used'].map(x=>`<option ${x===item?.item_condition?'selected':''}>${x}</option>`).join('')}),
+    field('Status','status',item?.status || 'Available',{type:'select',options:['Available','Sold'].map(x=>`<option ${x===(item?.status||'Available')?'selected':''}>${x}</option>`).join('')}),
+    field('Description','description',item?.description,{type:'textarea',full:true,placeholder:'Tell buyers about the item condition and details.'})
+  ].join('');
+  openModal({ title:item?'Edit Marketplace Item':'Post Marketplace Item', eyebrow:'Marketplace', body, submitLabel:item?'Save Changes':'Post Item', onSubmit:async form => {
+    const payload=formDataObject(form); const method=item?'PUT':'POST'; const url=item?`/api/products/${item.product_id}`:'/api/products';
+    const r=await api(url,{method,body:payload}); toast(r.message); closeModal(); navigate('marketplace');
+  }});
+}
+
+function openProjectForm(item = null) {
+  const currentSkills = new Set((item?.skills || '').split(', ').filter(Boolean));
+  const checks = state.meta.skills.map(s => `<label class="check-card"><input type="checkbox" name="skill_ids" value="${s.skill_id}" ${currentSkills.has(s.skill_name)?'checked':''} /> ${esc(s.skill_name)}</label>`).join('');
+  const body = [
+    field('Project Title','title',item?.title,{full:true,required:true,placeholder:'e.g., Smart Campus Attendance System'}),
+    field('Status','status',item?.status || 'Open',{type:'select',options:['Open','Closed'].map(x=>`<option ${x===(item?.status||'Open')?'selected':''}>${x}</option>`).join('')}),
+    field('Description','description',item?.description,{type:'textarea',full:true,placeholder:'Describe your idea, goal and the teammates you need.'}),
+    `<div class="form-field full"><span>Required Skills</span><div class="checkbox-grid">${checks}</div><small class="form-help">Choose one or more skills.</small></div>`
+  ].join('');
+  openModal({ title:item?'Edit Team Project':'Create Team Project', eyebrow:'Team Finder', body, submitLabel:item?'Save Changes':'Create Project', onSubmit:async form => {
+    const fd=new FormData(form); const payload=Object.fromEntries(fd.entries()); payload.skill_ids=fd.getAll('skill_ids');
+    const r=await api(item?`/api/projects/${item.project_id}`:'/api/projects',{method:item?'PUT':'POST',body:payload}); toast(r.message); closeModal(); navigate('projects');
+  }});
+}
+
+function openApplicationForm(projectId) {
+  const project = state.cache.projects?.find(p => String(p.project_id)===String(projectId));
+  const body = field('Application Message','application_message','',{type:'textarea',full:true,placeholder:`Tell ${project?.creator_name || 'the project owner'} how you can contribute.`});
+  openModal({ title:'Apply To Project',eyebrow:project?.title || 'Team Finder',body,submitLabel:'Submit Application',onSubmit:async form=>{
+    const r=await api(`/api/projects/${projectId}/apply`,{method:'POST',body:formDataObject(form)});toast(r.message);closeModal();navigate('projects');
+  }});
+}
+
+async function openApplications(projectId) {
+  try {
+    const { applications } = await api(`/api/projects/${projectId}/applications`);
+    const body = applications.length ? `<div class="form-field full"><span>Project Applications</span><div style="display:grid;gap:9px">${applications.map(a=>`
+      <div style="border:1px solid #e6e9ef;border-radius:12px;padding:12px;display:grid;gap:8px">
+        <div style="display:flex;justify-content:space-between;gap:10px"><div><strong style="font-size:10px">${esc(a.applicant_name)}</strong><div style="font-size:8px;color:#929aaa;margin-top:3px">${esc(a.university_id || 'Student')} · ${fmtDate(a.applied_at)}</div></div><span class="badge ${a.status==='Accepted'?'green':a.status==='Rejected'?'red':'orange'}">${esc(a.status)}</span></div>
+        <p style="font-size:9px;color:#697386;line-height:1.55;margin:0">${esc(a.application_message || 'No message provided.')}</p>
+        ${a.status==='Pending'?`<div class="card-actions" style="justify-content:flex-start"><button type="button" class="mini-btn success" data-app-action="Accepted" data-app-id="${a.application_id}">Accept</button><button type="button" class="mini-btn danger" data-app-action="Rejected" data-app-id="${a.application_id}">Reject</button></div>`:''}
+      </div>`).join('')}</div></div>` : `<div class="form-field full">${emptyState('♢','No applications yet','When students apply, their requests will appear here.')}</div>`;
+    openModal({title:'Review Applications',eyebrow:'Team Finder',body,hideSubmit:true});
+    $$('[data-app-action]', $('#modalBody')).forEach(b => b.onclick = async () => {
+      try { const r=await api(`/api/applications/${b.dataset.appId}`,{method:'PATCH',body:{status:b.dataset.appAction}});toast(r.message);await openApplications(projectId); } catch(e){toast(e.message,'error');}
+    });
+  } catch(e){toast(e.message,'error');}
+}
+
+function openResourceForm(item = null) {
+  const body = [
+    field('Course','course_id',item?.course_id,{type:'select',required:true,options:`<option value="">Choose course</option>${optionList(state.meta.courses,'course_id',x=>`${x.course_code} — ${x.course_name}`,item?.course_id)}`}),
+    field('Resource Type','resource_type',item?.resource_type,{type:'select',required:true,options:['Lecture Notes','Practice','Cheat Sheet','Slides','Reference','Other'].map(x=>`<option ${x===item?.resource_type?'selected':''}>${x}</option>`).join('')}),
+    field('Title','title',item?.title,{full:true,required:true,placeholder:'e.g., CSE302 Normalization Notes'}),
+    field('Resource URL','file_url',item?.file_url,{type:'url',full:true,placeholder:'https://drive.google.com/...',help:'For this CSE302 demo, resources are stored as shareable links.'})
+  ].join('');
+  openModal({title:item?'Edit Resource':'Share Study Resource',eyebrow:'Academic Library',body,submitLabel:item?'Save Changes':'Share Resource',onSubmit:async form=>{
+    const r=await api(item?`/api/resources/${item.resource_id}`:'/api/resources',{method:item?'PUT':'POST',body:formDataObject(form)});toast(r.message);closeModal();navigate('resources');
+  }});
+}
+
+function openLostFoundForm(item = null) {
+  const body = [
+    field('Report Type','report_type',item?.report_type || 'Lost',{type:'select',required:true,options:['Lost','Found'].map(x=>`<option ${x===(item?.report_type||'Lost')?'selected':''}>${x}</option>`).join('')}),
+    field('Status','status',item?.status || 'Open',{type:'select',options:['Open','Resolved'].map(x=>`<option ${x===(item?.status||'Open')?'selected':''}>${x}</option>`).join('')}),
+    field('Item Name','item_name',item?.item_name,{full:true,required:true,placeholder:'e.g., Black scientific calculator'}),
+    field('Location','location',item?.location,{required:true,placeholder:'e.g., CSE Lab'}),
+    field('Report Date','report_date',inputDate(item?.report_date),{type:'date',required:true}),
+    field('Details','description',item?.description,{type:'textarea',full:true,placeholder:'Add identifying details that can help match the item.'})
+  ].join('');
+  openModal({title:item?'Edit Report':'Create Lost & Found Report',eyebrow:'Lost & Found',body,submitLabel:item?'Save Changes':'Publish Report',onSubmit:async form=>{
+    const r=await api(item?`/api/lost-found/${item.report_id}`:'/api/lost-found',{method:item?'PUT':'POST',body:formDataObject(form)});toast(r.message);closeModal();navigate('lostfound');
+  }});
+}
+
+function openEventForm(item = null) {
+  const body = [
+    field('Event Name','event_name',item?.event_name,{full:true,required:true,placeholder:'e.g., Database Design Workshop'}),
+    field('Venue','venue',item?.venue,{required:true,placeholder:'e.g., Room 550'}),
+    field('Capacity','capacity',item?.capacity || 50,{type:'number',min:1,required:true}),
+    field('Event Date & Time','event_date',inputDateTime(item?.event_date),{type:'datetime-local',required:true}),
+    field('Registration Deadline','registration_deadline',inputDateTime(item?.registration_deadline),{type:'datetime-local'}),
+    field('Description','description',item?.description,{type:'textarea',full:true,placeholder:'What should attendees know about this event?'})
+  ].join('');
+  openModal({title:item?'Edit Campus Event':'Create Campus Event',eyebrow:'Events',body,submitLabel:item?'Save Changes':'Create Event',onSubmit:async form=>{
+    const r=await api(item?`/api/events/${item.event_id}`:'/api/events',{method:item?'PUT':'POST',body:formDataObject(form)});toast(r.message);closeModal();navigate('events');
+  }});
+}
+
+function openUserForm(item = null) {
+  const deptOptions = `<option value="">No department</option>${optionList(state.meta.departments,'dept_id',x=>`${x.dept_code} — ${x.dept_name}`,item?.dept_id)}`;
+  const roleOptions = optionList(state.meta.roles,'role_id',x=>x.role_name,item?.role_id);
+  const body = [
+    field('Full Name','name',item?.name,{required:true}),
+    field('University ID','university_id',item?.university_id,{placeholder:'Student or teacher ID'}),
+    field('Email','email',item?.email,{type:'email',required:true}),
+    field('Phone','phone',item?.phone,{type:'tel'}),
+    field('Department','dept_id',item?.dept_id,{type:'select',options:deptOptions}),
+    field('Role','role_id',item?.role_id,{type:'select',required:true,options:roleOptions}),
+    field(item?'New Password (Optional)':'Password','password','',{type:'password',full:true,required:!item,placeholder:item?'Leave blank to keep current password':'Minimum 6 characters'})
+  ].join('');
+  openModal({title:item?'Edit User':'Create Campus User',eyebrow:'Administrator',body,submitLabel:item?'Save Changes':'Create User',onSubmit:async form=>{
+    const r=await api(item?`/api/users/${item.user_id}`:'/api/users',{method:item?'PUT':'POST',body:formDataObject(form)});toast(r.message);closeModal();navigate('users');
+  }});
+}
+
+function openProfile() {
+  const u=state.user;
+  const body = [
+    field('Name','name',u.name,{required:true}),
+    field('Phone','phone',u.phone,{type:'tel'}),
+    `<label class="form-field"><span>Email</span><input value="${esc(u.email)}" disabled /><small class="form-help">Email changes are managed by Admin.</small></label>`,
+    `<label class="form-field"><span>Role</span><input value="${esc(u.role)}" disabled /></label>`,
+    field('New Password','password','',{type:'password',full:true,placeholder:'Leave blank to keep current password'})
+  ].join('');
+  openModal({title:'My Profile',eyebrow:'Account Settings',body,submitLabel:'Update Profile',onSubmit:async form=>{
+    const r=await api('/api/profile',{method:'PUT',body:formDataObject(form)});state.user=r.user;updateUserUI();toast(r.message);closeModal();
+  }});
+}
+
+function confirmAction(title, message='This action cannot be undone.', okLabel='Delete') {
+  return new Promise(resolve => {
+    $('#confirmTitle').textContent=title;
+    $('#confirmMessage').textContent=message;
+    $('#confirmOk').textContent=okLabel;
+    $('#confirmBackdrop').classList.remove('hidden');
+    const finish=value=>{ $('#confirmBackdrop').classList.add('hidden'); $('#confirmOk').onclick=null; $('#confirmCancel').onclick=null; resolve(value); };
+    $('#confirmOk').onclick=()=>finish(true);
+    $('#confirmCancel').onclick=()=>finish(false);
+  });
+}
+
+async function deleteRecord(url, title, refresh) {
+  if (!await confirmAction(title)) return;
+  try { const r=await api(url,{method:'DELETE'});toast(r.message);refresh(); } catch(e){toast(e.message,'error');}
+}
+
+// Global event bindings
+$('#loginForm').addEventListener('submit', e => {
+  e.preventDefault();
+  login($('#loginEmail').value.trim(), $('#loginPassword').value);
+});
+
+$$('[data-demo]').forEach(btn => btn.addEventListener('click', () => {
+  const demo = {
+    student:['student@campusconnect.local','student123'],
+    teacher:['teacher@campusconnect.local','teacher123'],
+    admin:['admin@campusconnect.local','admin123']
+  }[btn.dataset.demo];
+  $('#loginEmail').value=demo[0]; $('#loginPassword').value=demo[1]; login(...demo);
+}));
+
+$('#togglePassword').onclick = () => {
+  const input=$('#loginPassword');
+  input.type=input.type==='password'?'text':'password';
+  $('#togglePassword').textContent=input.type==='password'?'Show':'Hide';
+};
+$('#menuButton').onclick=openSidebar;
+$('#closeSidebar').onclick=closeSidebar;
+$('#sidebarOverlay').onclick=closeSidebar;
+$('#logoutButton').onclick=logout;
+$('#profileButton').onclick=openProfile;
+$$('.nav-item').forEach(item => item.onclick=()=>navigate(item.dataset.page));
+$('#modalClose').onclick=closeModal;
+$('#modalCancel').onclick=closeModal;
+$('#modalBackdrop').addEventListener('click',e=>{ if(e.target===$('#modalBackdrop')) closeModal(); });
+$('#modalForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!state.modalSubmitHandler)return;
+  const btn=$('#modalSubmit'); const old=btn.textContent; btn.disabled=true; btn.textContent='Saving…';
+  try { await state.modalSubmitHandler(e.currentTarget); }
+  catch(err){toast(err.message,'error');}
+  finally { btn.disabled=false; btn.textContent=old; }
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ if(!$('#confirmBackdrop').classList.contains('hidden')) $('#confirmCancel').click(); else if(!$('#modalBackdrop').classList.contains('hidden')) closeModal(); else closeSidebar(); } });
+
+(async function boot(){
+  try {
+    const { user } = await api('/api/auth/me');
+    state.user=user;
+    state.meta=await api('/api/meta');
+    enterApp();
+  } catch (_) {
+    $('#loginScreen').classList.remove('hidden');
+    $('#mainApp').classList.add('hidden');
+  }
+})();
+
+  </script>
+</body>
+</html>
